@@ -1,0 +1,11 @@
+dojo_game_of_thrones_homepage:
+    path:     /
+    defaults: { _controller: DOJOGameOfThronesBundle:Default:index }
+
+dojo_game_of_thrones_personnage:
+    path:     /personnage/{id}
+    defaults: { _controller: DOJOGameOfThronesBundle:Personnage:showPersonnage }
+
+dojo_game_of_thrones_personnage_ajout:
+    path:     /personnage/add/{nom}/{prenom}/{sexe}
+    defaults: { _controller: DOJOGameOfThronesBundle:Personnage:addPerso }
