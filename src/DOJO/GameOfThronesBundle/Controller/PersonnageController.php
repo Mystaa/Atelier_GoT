@@ -19,7 +19,7 @@ class PersonnageController extends Controller
 
     }
 
-    public function addPersoAction($nom,$prenom,$sexe,$bio='')
+    public function addPersonnageAction($nom,$prenom,$sexe,$bio='')
     {
         $em = $this->getDoctrine()->getManager();
         $personnage = new Personnage();
@@ -31,4 +31,14 @@ class PersonnageController extends Controller
         $em->flush();
     }
 
+    public function listPersonnageSexeAction($sexe)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $personnages=$em->getRepository('DOJOGameOfThronesBundle:Personnage')
+            ->findBySexe($sexe);
+
+        return $this->render('DOJOGameOfThronesBundle:Personnage:list_personnage.html.twig', array(
+            'personnages'=> $personnages,
+        ));
+    }
 }

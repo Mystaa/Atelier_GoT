@@ -6,6 +6,15 @@ dojo_game_of_thrones_personnage:
     path:     /personnage/{id}
     defaults: { _controller: DOJOGameOfThronesBundle:Personnage:showPersonnage }
 
+dojo_game_of_thrones_personnage_list:
+    path:    /personnage/list/{sexe}
+    defaults: { _controller: DOJOGameOfThronesBundle:Personnage:listPersonnageSexe }
+
 dojo_game_of_thrones_personnage_ajout:
     path:     /personnage/add/{nom}/{prenom}/{sexe}
-    defaults: { _controller: DOJOGameOfThronesBundle:Personnage:addPerso }
+    defaults: { _controller: DOJOGameOfThronesBundle:Personnage:addPersonnage }
+
+dojo_game_of_thrones_royaume_ajout:
+    path:     /royaume/add/{nom}/{capitale}/{nbHabitant}
+    defaults: { _controller: DOJOGameOfThronesBundle:Royaume:addRoyaume }
+

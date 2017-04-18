@@ -1,0 +1,28 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}DOJOGameOfThronesBundle:Personnage:listPersonnage{% endblock %}
+
+{% block body %}
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>sexe</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for personnage in personnages %}
+        <tr>
+            <td>
+                {{ personnage.nom }}
+            </td>
+            <td>
+                {{ personnage.sexe }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
