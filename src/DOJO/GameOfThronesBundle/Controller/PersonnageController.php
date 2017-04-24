@@ -3,7 +3,14 @@
 namespace DOJO\GameOfThronesBundle\Controller;
 
 use DOJO\GameOfThronesBundle\Entity\Personnage;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DomCrawler\Field\ChoiceFormField;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class PersonnageController extends Controller
 {
@@ -41,4 +48,33 @@ class PersonnageController extends Controller
             'personnages'=> $personnages,
         ));
     }
+    public function addAction(Request $request)
+    {
+        $perso = new Personnage();
+
+        $formBuilder = $this->createFormBuilder($perso);
+        $formBuilder
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
+            ->add('sexe', TextType::class)
+            ->add('bio', TextType::class)
+            ->add('royaume', EntityType::class, array(
+                'class' => 'DOJOGameOfThronesBundle:Royaume',
+                'choice_label' => 'nom'))
+            ->add('save', SubmitType::class);
+
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($perso);
+            $em->flush();
+        }
+
+        return $this->render('DOJOGameOfThronesBundle:Personnage:add.html.twig', array(
+            'addPerso' => $form->createView(),
+        ));
+
+    }
+
 }

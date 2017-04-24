@@ -22,5 +22,6 @@ class RoyaumeController extends Controller
             'royaume'=> $royaume,
         ));
     }
+    
 
 }
